@@ -37,16 +37,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$value = htmlentities(trim(utf8_encode($value)));
 		$field[$key] = $value;
 	}
-if(!$field['name']){
-   exit("Name is Required");
+    if(!$field['name']){
+       exit("Name is Required");
+    }
+    if(!$field['email']){
+       exit("Email is Required");
+    }
+    if(!filter_var($field['email'],FILTER_VALIDATE_EMAIL)){
+       exit("Invalid Email");
+    }
 }
-if(!$field['email']){
-   exit("Email is Required");
-}
-if(!filter_var($field['email'],FILTER_VALIDATE_EMAIL)){
-   exit("Invalid Email");
-}
-
 function send_mail($fields){
     global $mail;
     $m = '<html><head><title>'.$mail['subject'].'</title></head><body><table>';
